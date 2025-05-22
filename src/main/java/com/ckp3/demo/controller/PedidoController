@@ -1,0 +1,33 @@
+package com.ckp3.demo.controller;
+
+import com.ckp3.demo.model.Pedido;
+import com.ckp3.demo.service.PedidoService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/pedidos")
+public class PedidoController {
+
+    private final PedidoService service;
+
+    public PedidoController(PedidoService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Pedido> listarTodos() {
+        return service.listarTodos();
+    }
+
+    @PostMapping
+    public Pedido salvar(@RequestBody Pedido pedido) {
+        return service.salvar(pedido);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        service.deletar(id);
+    }
+}
